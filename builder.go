@@ -1,8 +1,8 @@
 package xcache
 
 import (
-	"cache/buffer"
-	"cache/cache"
+	"xcache/buffer"
+	"xcache/cache"
 )
 
 type ReplacementPolicy int

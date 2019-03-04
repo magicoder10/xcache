@@ -1,9 +1,9 @@
 package cache
 
 import (
-	"cache/buffer"
-	"cache/entity"
 	"errors"
+	"xcache/buffer"
+	"xcache/entity"
 )
 
 type Cache interface {
