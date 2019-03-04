@@ -12,14 +12,14 @@ type Buffer interface {
 	Has(block *Block) bool
 }
 
-type LRU struct {
+type LRUBuffer struct {
 	head     *Block
 	tail     *Block
 	size     int
 	capacity int
 }
 
-func (l LRU) Keys() []Key {
+func (l LRUBuffer) Keys() []Key {
 	keys := make([]Key, 0)
 
 	for curr := l.head.next; curr != nil; curr = curr.next {
@@ -29,7 +29,7 @@ func (l LRU) Keys() []Key {
 	return keys
 }
 
-func (l LRU) Values() []Value {
+func (l LRUBuffer) Values() []Value {
 	values := make([]Value, 0)
 
 	for curr := l.head.next; curr != nil; curr = curr.next {
@@ -39,7 +39,7 @@ func (l LRU) Values() []Value {
 	return values
 }
 
-func (l LRU) Has(block *Block) bool {
+func (l LRUBuffer) Has(block *Block) bool {
 	for curr := l.head; curr != nil; curr = curr.next {
 		if curr == block {
 			return true
@@ -49,7 +49,7 @@ func (l LRU) Has(block *Block) bool {
 	return false
 }
 
-func (l *LRU) Access(block *Block) *Block {
+func (l *LRUBuffer) Access(block *Block) *Block {
 	l.Remove(block)
 
 	key := block.key
@@ -58,11 +58,11 @@ func (l *LRU) Access(block *Block) *Block {
 	return l.Add(key, value)
 }
 
-func (l LRU) Size() int {
+func (l LRUBuffer) Size() int {
 	return l.size
 }
 
-func (l *LRU) Add(key Key, value Value) *Block {
+func (l *LRUBuffer) Add(key Key, value Value) *Block {
 	newBlock := Block{
 		prev: l.tail,
 		key:  key,
@@ -76,7 +76,7 @@ func (l *LRU) Add(key Key, value Value) *Block {
 	return &newBlock
 }
 
-func (l *LRU) Remove(block *Block) {
+func (l *LRUBuffer) Remove(block *Block) {
 	if block == nil {
 		return
 	}
@@ -95,11 +95,11 @@ func (l *LRU) Remove(block *Block) {
 	l.size--
 }
 
-func (l LRU) IsFull() bool {
+func (l LRUBuffer) IsFull() bool {
 	return l.size == l.capacity
 }
 
-func (l *LRU) Evict() *Block {
+func (l *LRUBuffer) Evict() *Block {
 	block := l.head.next
 	l.Remove(l.head.next)
 	return block
@@ -115,7 +115,7 @@ type Block struct {
 func NewLRUBuffer(capacity int) Buffer {
 	dummyBlock := Block{}
 
-	return &LRU{
+	return &LRUBuffer{
 		head:     &dummyBlock,
 		tail:     &dummyBlock,
 		size:     0,
