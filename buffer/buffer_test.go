@@ -1,4 +1,4 @@
-package xcache
+package buffer
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestLRU_Add(t *testing.T) {
-	buffer := NewLRUBuffer(3)
+	buffer := NewLRU(3)
 	assert.Equal(t, 0, buffer.Size())
 
 	buffer.Add(1, 10)
@@ -14,7 +14,7 @@ func TestLRU_Add(t *testing.T) {
 }
 
 func TestLRU_IsFull(t *testing.T) {
-	buffer := NewLRUBuffer(2)
+	buffer := NewLRU(2)
 
 	assert.False(t, buffer.IsFull())
 	assert.Equal(t, 0, buffer.Size())
@@ -29,7 +29,7 @@ func TestLRU_IsFull(t *testing.T) {
 }
 
 func TestLRU_Evict(t *testing.T) {
-	buffer := NewLRUBuffer(2)
+	buffer := NewLRU(2)
 
 	assert.Equal(t, 0, buffer.Size())
 
@@ -41,11 +41,11 @@ func TestLRU_Evict(t *testing.T) {
 
 	block := buffer.Evict()
 	assert.Equal(t, 1, buffer.Size())
-	assert.Equal(t, 1, block.key)
+	assert.Equal(t, 1, block.Key)
 }
 
 func TestLRU_Remove(t *testing.T) {
-	buffer := NewLRUBuffer(3)
+	buffer := NewLRU(3)
 
 	assert.False(t, buffer.IsFull())
 	assert.Equal(t, 0, buffer.Size())
