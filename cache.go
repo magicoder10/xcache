@@ -2,8 +2,8 @@ package xcache
 
 import "errors"
 
-type Key interface {}
-type Value interface {}
+type Key interface{}
+type Value interface{}
 
 type Cache interface {
 	Set(key Key, value Value)
@@ -37,8 +37,6 @@ func (c MemCache) Set(key Key, value Value) {
 	block := c.buffer.Add(key, value)
 	c.blocks[key] = block
 }
-
-
 
 func (c MemCache) Get(key Key) (Value, error) {
 	block, ok := c.blocks[key]

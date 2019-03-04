@@ -13,14 +13,14 @@ type Buffer interface {
 }
 
 type LRU struct {
-	head *Block
-	tail *Block
-	size int
+	head     *Block
+	tail     *Block
+	size     int
 	capacity int
 }
 
 func (l LRU) Keys() []Key {
-	keys := make([]Key,0)
+	keys := make([]Key, 0)
 
 	for curr := l.head.next; curr != nil; curr = curr.next {
 		keys = append(keys, curr.key)
@@ -30,7 +30,7 @@ func (l LRU) Keys() []Key {
 }
 
 func (l LRU) Values() []Value {
-	values := make([]Value,0)
+	values := make([]Value, 0)
 
 	for curr := l.head.next; curr != nil; curr = curr.next {
 		values = append(values, curr.val)
@@ -65,8 +65,8 @@ func (l LRU) Size() int {
 func (l *LRU) Add(key Key, value Value) *Block {
 	newBlock := Block{
 		prev: l.tail,
-		key: key,
-		val:value,
+		key:  key,
+		val:  value,
 	}
 	l.tail.next = &newBlock
 
@@ -108,17 +108,17 @@ func (l *LRU) Evict() *Block {
 type Block struct {
 	prev *Block
 	next *Block
-	key Key
-	val Value
+	key  Key
+	val  Value
 }
 
 func NewLRUBuffer(capacity int) Buffer {
-	dummyBlock :=  Block{}
+	dummyBlock := Block{}
 
 	return &LRU{
-		head: &dummyBlock,
-		tail: &dummyBlock,
-		size:0,
-		capacity:capacity,
+		head:     &dummyBlock,
+		tail:     &dummyBlock,
+		size:     0,
+		capacity: capacity,
 	}
 }

@@ -9,7 +9,7 @@ func TestLRU_Add(t *testing.T) {
 	buffer := NewLRUBuffer(3)
 	assert.Equal(t, 0, buffer.Size())
 
-	buffer.Add(1,10)
+	buffer.Add(1, 10)
 	assert.Equal(t, 1, buffer.Size())
 }
 
@@ -19,11 +19,11 @@ func TestLRU_IsFull(t *testing.T) {
 	assert.False(t, buffer.IsFull())
 	assert.Equal(t, 0, buffer.Size())
 
-	buffer.Add(1,10)
+	buffer.Add(1, 10)
 	assert.False(t, buffer.IsFull())
 	assert.Equal(t, 1, buffer.Size())
 
-	buffer.Add(2,10)
+	buffer.Add(2, 10)
 	assert.True(t, buffer.IsFull())
 	assert.Equal(t, 2, buffer.Size())
 }
@@ -33,10 +33,10 @@ func TestLRU_Evict(t *testing.T) {
 
 	assert.Equal(t, 0, buffer.Size())
 
-	buffer.Add(1,10)
+	buffer.Add(1, 10)
 	assert.Equal(t, 1, buffer.Size())
 
-	buffer.Add(2,11)
+	buffer.Add(2, 11)
 	assert.Equal(t, 2, buffer.Size())
 
 	block := buffer.Evict()
@@ -50,13 +50,13 @@ func TestLRU_Remove(t *testing.T) {
 	assert.False(t, buffer.IsFull())
 	assert.Equal(t, 0, buffer.Size())
 
-	buffer.Add(1,10)
+	buffer.Add(1, 10)
 	assert.Equal(t, 1, buffer.Size())
 
-	block := buffer.Add(2,11)
+	block := buffer.Add(2, 11)
 	assert.Equal(t, 2, buffer.Size())
 
-	buffer.Add(3,12)
+	buffer.Add(3, 12)
 	assert.Equal(t, 3, buffer.Size())
 
 	assert.True(t, buffer.Has(block))
