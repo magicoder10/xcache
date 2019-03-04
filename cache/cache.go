@@ -2,8 +2,8 @@ package cache
 
 import (
 	"errors"
-	"xcache/buffer"
-	"xcache/entity"
+	"github.com/byliuyang/xcache/buffer"
+	"github.com/byliuyang/xcache/entity"
 )
 
 type Cache interface {

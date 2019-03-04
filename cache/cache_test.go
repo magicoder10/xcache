@@ -1,10 +1,10 @@
 package cache
 
 import (
+	"github.com/byliuyang/xcache/buffer"
+	"github.com/byliuyang/xcache/entity"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"xcache/buffer"
-	"xcache/entity"
 )
 
 func TestNewLRUCache(t *testing.T) {

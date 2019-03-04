@@ -1,6 +1,6 @@
 package buffer
 
-import "xcache/entity"
+import "github.com/byliuyang/xcache/entity"
 
 type Buffer interface {
 	IsFull() bool

@@ -1,8 +1,8 @@
 package xcache
 
 import (
-	"xcache/buffer"
-	"xcache/cache"
+	"github.com/byliuyang/xcache/buffer"
+	"github.com/byliuyang/xcache/cache"
 )
 
 type ReplacementPolicy int
@@ -22,7 +22,7 @@ func (b *Builder) Build() cache.Cache {
 		buf := buffer.NewLRU(b.capacity)
 		return cache.NewMemCache(buf)
 	default:
-		panic("xcache: unknown cache replacement policy")
+		panic("github.com/byliuyang/xcache: unknown cache replacement policy")
 	}
 }
 
