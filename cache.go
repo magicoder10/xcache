@@ -22,10 +22,6 @@ func NewMemCache(buffer Buffer) Cache {
 	}
 }
 
-func NewLRUCache(capacity int) Cache {
-	return NewMemCache(NewLRUBuffer(capacity))
-}
-
 func (c MemCache) Set(key Key, value Value) {
 	if block, ok := c.blocks[key]; ok {
 		block.key = key
