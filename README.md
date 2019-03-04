@@ -15,10 +15,11 @@ $ go get github.com/byliuyang/xcache
 ```go
 import "github.com/byliuyang/xcache"
 
-// Initialize buffer with length of 3
-// LRU represents Least Recently Used replacement policy
-buffer := NewLRUBuffer(3)
-cache := NewMemCache(buffer)
+// Initialize buffer with length of 3 and LRU replacement policy
+cache := NewBuilder().
+	Capacity(3).
+	LRU().
+	Build()
 
 cache.Set(1, 4)
 value, err := cache.Get(1)
